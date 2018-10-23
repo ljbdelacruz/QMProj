@@ -1,0 +1,17 @@
+<ion-content padding class="fourth-bg-color">
+    <button (click)="OpenSelectTimeZone()" ion-button>
+        <span *ngIf="selectedTimeZone.length <= 0">Timezone</span> {{selectedTimeZone}}
+    </button>
+    <ion-img src="assets/imgs/front.png" class="height-200-px width-100-percent"></ion-img>
+    <ion-input type="text" placeholder="Email Address" [(ngModel)]="userInput.EmailAddress" class="border-line-bottom-1px-secondary primary-text-color margin-top-20-px"></ion-input>
+    <ion-input type="password" placeholder="Password" [(ngModel)]="userInput.Password" class="border-line-bottom-1px-secondary primary-text-color"></ion-input>
+    <button ion-button (click)="LoginEvent()" class="width-98-percent tertiary-bg-color margin-top-100-px">LOGIN</button>
+    <!-- <button ion-button class="width-98-percent tertiary-bg-color" (click)="GotoSignup()">SIGN UP</button> -->
+    <button ion-button (click)="SignUp()" class="width-98-percent tertiary-bg-color">SIGNUP</button>
+    <ion-item class="visibility-hidden" no-lines>
+        <ion-label>Select Timezone</ion-label>
+        <ion-select id='tz' [(ngModel)]="selectedTimeZone">
+            <ion-option *ngFor="let item of servers" value="{{item.Timezone}}">{{item.Name}}</ion-option>
+        </ion-select>
+    </ion-item>
+</ion-content>

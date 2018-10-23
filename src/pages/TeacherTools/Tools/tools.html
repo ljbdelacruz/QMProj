@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <button ion-button clear (click)="Close()">
+         <ion-icon class="font-size-30 fifth-text-color" name="ios-arrow-back"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6>
+                <a class="block block-link-hover2 text-center" (click)="ViewQuizList()">
+                    <div class="block-content block-content-full bg-primary">
+                        <i class="fa fa-folder-open fa-4x text-white"></i>
+                        <div class="font-w600 text-white-op push-15-t">Tests</div>
+                    </div>
+                </a>
+                <!-- <button class="width-100-percent height-150-px border-radius-100p" (click)="ViewQuizList()" ion-button>
+                    <p><ion-icon class="font-size-30" name="md-list"></ion-icon><br>Tests</p>
+                </button> -->
+            </ion-col>
+            <ion-col col-6></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

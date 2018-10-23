@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <button *ngIf="mode==1 || mode==3?true:false" ion-button clear (click)="Close()">
+            <ion-icon class="font-size-30 fifth-text-color" name="ios-arrow-back"></ion-icon>
+        </button>
+        <button *ngIf="mode==0 || mode==2?true:false" ion-button clear (click)="SaveAnswers()">
+            <ion-icon class="font-size-30 fifth-text-color" name="md-checkmark-circle-outline"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-slides>
+        <ion-slide *ngFor="let question of questions">
+            <div class="block">
+                <div class="block-content">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                                <ion-grid>
+                                        <ion-col col-12>
+                                            <button ion-button *ngIf="question.Images.length > 0" (click)="TogglePopover($event, question.Images)" clear>
+                                                <ion-icon class="font-size-30" name="ios-attach"></ion-icon>&nbsp;&nbsp;Show Attachments
+                                            </button>
+                                        </ion-col>
+                                        <ion-col col-12>
+                                            <p>{{question.Questions}}</p>
+                                            <p *ngIf="mode==2 || mode==1?true:false">{{question.UserAnswer.PointsEarned}}/{{question.Points}}</p>
+                                        </ion-col>
+                                        <!-- Multiple choice -->
+                                        <ion-col col-12>
+                                            <div *ngIf="question.Status.ID == '4705bd60-d2e5-4e69-9fa6-1fe85e3c5e6f'">
+                                                <ion-list *ngIf="mode==0?true:false" radio-group [(ngModel)]="question.UserAnswer.QuizAnswerID">
+                                                    <ion-row *ngFor="let choice of question.Choices">
+                                                        <ion-item no-lines>
+                                                            <ion-label>{{choice.Description}}</ion-label>
+                                                            <ion-radio value="{{choice.ID}}"></ion-radio>
+                                                        </ion-item>
+                                                        <button ion-button *ngIf="question.Images.length > 0" (click)="TogglePopover($event, choice.Images)" clear>
+                                                            <ion-icon class="font-size-30" name="ios-attach"></ion-icon>&nbsp;&nbsp;Show Attachments
+                                                        </button>
+                                                    </ion-row>
+                                                </ion-list>
+                                                <div  *ngIf="mode==1 || mode==2 || mode==3?true:false">
+                                                    <ion-row class="margin-top-20-px" *ngFor="let choice of question.Choices">
+                                                        <ion-item class="border-line-1px-primary border-radius-10-px">
+                                                            <ion-label class="sixth-text-color" item-start>{{choice.Description}}</ion-label>
+                                                            <ion-icon item-end *ngIf="question.UserAnswer.QuizAnswerID == choice.ID?true:false" name="md-checkmark"></ion-icon>
+                                                            <ion-icon *ngIf="choice.isCorrect" item-end class="opacity-50" name="md-checkmark"></ion-icon>
+                                                            <ion-icon *ngIf="!choice.isCorrect && mode!=3" item-end class="opacity-50" name="md-close"></ion-icon>
+                                                        </ion-item>
+                                                        <button ion-button *ngIf="question.Images.length > 0" (click)="TogglePopover($event, choice.Images)" clear>
+                                                            <ion-icon class="font-size-30" name="ios-attach"></ion-icon>&nbsp;&nbsp;Show Attachments
+                                                        </button>
+                                                        <p *ngIf="mode==3?true:false">Percent: {{choice.Percent}}</p>
+                                                    </ion-row>
+                                                </div>
+                                            </div>
+                                        </ion-col>
+                                        <!-- Essay -->
+                                        <ion-item no-lines col-12 *ngIf="question.Status.ID == 'ab075d70-d51b-4d75-95fe-123478bd2a48'">
+                                            <ion-textarea class="border-line-1px-primary border-radius-10-px sixth-text-color" *ngIf="mode==0?true:false" [(ngModel)]="question.UserAnswer.OtherAnswer" class="border-line-1px-primary margin-top-20-px height-50-px" placeholder="Answer"></ion-textarea>
+                                            <p class="border-line-1px-primary border-radius-10-px sixth-text-color" *ngIf="mode==1 || mode == 2?true:false">{{question.UserAnswer.OtherAnswer}}</p>
+                                            <ion-input class="border-line-1px-primary border-radius-10-px" *ngIf="mode==2?true:false" type="number" placeholder="Points Earned" [(ngModel)]="question.UserAnswer.PointsEarned"></ion-input>
+                                        </ion-item>
+                                    </ion-grid> 
+                        </div>
+                            
+                    </div>
+                                           
+                </div>
+            </div>
+
+        </ion-slide>
+    </ion-slides>
+</ion-content>

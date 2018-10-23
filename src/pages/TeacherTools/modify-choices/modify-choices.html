@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <button ion-button clear (click)="Close()">
+            <ion-icon class="fifth-text-color font-size-30" name="ios-arrow-back"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div>
+        <div class="block block-themed">
+                <div class="block-header bg-info">
+                        <ul class="block-options">
+                            <li>
+                                <button ion-button clear class="float-right" (click)="SaveChanges()"> 
+                                    <ion-icon class="fifth-text-color font-size-20" name="md-checkmark-circle-outline"></ion-icon>
+                                </button>
+                            </li>
+                        </ul>
+                        <h3 class="block-title">
+                            <span *ngIf="mode==0">Add</span>
+                            <span *ngIf="mode==1">Edit</span>
+                        </h3>
+                </div>
+                <div class="block-content">
+                    <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="contact1-desc">Question</label>
+                                <input [(ngModel)]="qaModel.Description" class="form-control" type="text" id="contact1-desc" name="contact1-desc" placeholder="Enter description..">
+                            </div>
+                            <div class="col-xs-12" *ngIf="!isSurvey">
+                                <label class="css-input switch switch-sm switch-success font-size-20">
+                                    <input [(ngModel)]="qaModel.isCorrect" type="checkbox" id="register1-oc" name="register1-oc"><span></span> Is Correct?
+                                </label>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-4" *ngFor="let image of images">
+                                        <button class="max-width-100p" ion-button (click)="RemoveImageEvent(image)">
+                                            <ion-icon class="font-size-20" name="md-close"></ion-icon>
+                                        </button>
+                                        <img class="max-width-70px border-radius-10-px height-70-px border-line-1px-secondary" src="{{url}}{{image.Source}}" imageViewer/>
+                                </div>
+                                <div class="col-xs-12">
+                                    <upload-single-image (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qaModel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image>
+                                    <!-- <upload-single-image1 (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qaModel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image1> -->
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+
+        </div>
+
+
+        <!-- <ion-grid>
+            <ion-row>
+                <ion-col col-12>
+                    <ion-input type="text" [(ngModel)]="qaModel.Description" placeholder="Description" class="border-line-bottom-1px-secondary"></ion-input>
+                    <ion-input *ngIf="!isSurvey" type="number" [(ngModel)]="qaModel.Points" placeholder="Points Earned" class="border-line-bottom-1px-secondary"></ion-input>
+                    <ion-item *ngIf="!isSurvey">
+                        <ion-label>Is Correct?</ion-label>
+                        <ion-checkbox [(ngModel)]="qaModel.isCorrect"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-4 *ngFor="let image of images">
+                    <button class="max-width-100p" ion-button (click)="RemoveImageEvent(image)">
+                        <ion-icon class="font-size-20" name="md-close"></ion-icon>
+                    </button>
+                    <img class="max-width-100p border-radius-10-px height-70-px border-line-1px-secondary" src="{{url}}{{image.Source}}" imageViewer/>
+                </ion-col>
+                <ion-col col-12>
+                    <upload-single-image (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qaModel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image> -->
+                    <!-- <upload-single-image1 (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qaModel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image1> -->
+                <!-- </ion-col>
+                <ion-col col-12>
+                    <button ion-button (click)="SaveChanges()">Save Changes</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid> -->
+    </div>
+</ion-content>

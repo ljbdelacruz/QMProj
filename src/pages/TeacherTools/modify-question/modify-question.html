@@ -1,0 +1,138 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <button ion-button clear (click)="Close()">
+            <ion-icon class="fifth-text-color font-size-30" name="ios-arrow-back"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <!--Modify QuizQuestion-->
+    <div class="block block-themed">
+            <div class="block-header bg-info">
+                <ul class="block-options">
+                    <li>
+                            <button ion-button clear class="float-right" (click)="AddEvent()"> 
+                                <ion-icon class="fifth-text-color font-size-20" name="md-checkmark-circle-outline"></ion-icon>
+                            </button>
+                    </li>
+                </ul>
+                <h3 class="block-title">
+                    <span *ngIf="mode==0">Add</span>
+                    <span *ngIf="mode==1">Edit</span>
+                </h3>
+            </div>
+            <div class="block-content">
+                    <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="contact1-q">Question</label>
+                                <input [(ngModel)]="qmodel.Questions" class="form-control" type="text" id="contact1-q" name="contact1-q" placeholder="Enter your question..">
+                            </div>
+                            <div class="col-xs-6">
+                                    <label for="contact1-p">Points</label>
+                                    <input [(ngModel)]="qmodel.Points" *ngIf="!isSurvey" class="form-control" type="number" id="contact1-p" name="contact1-p" placeholder="Enter points earn..">
+                            </div>
+                            <div class="col-xs-6">
+                                    <label>Position Order</label>
+                                    <ion-item>
+                                            <ion-select [(ngModel)]="qmodel.Order">
+                                                <ion-option *ngFor="let order of positionOrder" value="{{order.value}}">{{order.text}}</ion-option>
+                                            </ion-select>
+                                        </ion-item>
+                            </div>
+                            <div *ngIf="!isSurvey" class="col-xs-12">
+                                <label>Question Type</label>
+                                <ion-item>
+                                    <ion-select [(ngModel)]="status">
+                                        <ion-option value="ab075d70-d51b-4d75-95fe-123478bd2a48">Essay</ion-option>
+                                        <ion-option value="4705bd60-d2e5-4e69-9fa6-1fe85e3c5e6f">Multiple Choice</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                            </div>
+                            <div *ngIf="isSurvey" class="col-xs-12">
+                                <label>Question Type: Multiple Choice</label>
+                            </div>
+                            <div class="col-xs-12">
+                                    <ion-grid>
+                                            <ion-row>
+                                                <ion-col col-4 *ngFor="let image of images">
+                                                    <button class="max-width-100p" ion-button (click)="RemoveImageEvent(image)">
+                                                        <ion-icon class="font-size-20" name="md-close"></ion-icon>
+                                                    </button>
+                                                    <img class="max-width-100p border-radius-10-px height-70-px border-line-1px-secondary" src="{{url}}{{image.Source}}" imageViewer/>
+                                                </ion-col>
+                                                <ion-col col-12>
+                                                    <upload-single-image (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qmodel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image>
+                                                    <!-- <upload-single-image1 (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qmodel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image1> -->
+                                                </ion-col>
+                                            </ion-row>
+                                    </ion-grid>
+                            </div>
+                    </div>
+            </div>
+    </div>
+
+    <!-- <ion-item no-lines class="margin-top-20-px" no-lines>
+        <ion-label>Position Order</ion-label>
+        <ion-select [(ngModel)]="qmodel.Order">
+            <ion-option *ngFor="let order of positionOrder" value="{{order.value}}">{{order.text}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item no-lines *ngIf="!isSurvey" class="margin-top-20-px" no-lines>
+        <ion-label>Question Type</ion-label>
+        <ion-select [(ngModel)]="status">
+            <ion-option value="ab075d70-d51b-4d75-95fe-123478bd2a48">Essay</ion-option>
+            <ion-option value="4705bd60-d2e5-4e69-9fa6-1fe85e3c5e6f">Multiple Choice</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item no-lines *ngIf="isSurvey" no-lines class="margin-top-20-px">
+        <ion-label item-start>Question Type: </ion-label>
+        <ion-label>Multiple Choice</ion-label>
+    </ion-item>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-4 *ngFor="let image of images">
+                <button class="max-width-100p" ion-button (click)="RemoveImageEvent(image)">
+                    <ion-icon class="font-size-20" name="md-close"></ion-icon>
+                </button>
+                <img class="max-width-100p border-radius-10-px height-70-px border-line-1px-secondary" src="{{url}}{{image.Source}}" imageViewer/>
+            </ion-col>
+            <ion-col col-12>
+                <upload-single-image (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qmodel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image>-->
+
+                <!-- <upload-single-image1 (imageUploadedEvent)="ImageUploadReceiver($event)" [oid]="qmodel.ID" [source]="''" [path]="imgPath" [cid]="cid" [order]="images.length"></upload-single-image1> -->
+            <!-- </ion-col>
+        </ion-row>
+    </ion-grid>
+    <button (click)="AddEvent()" ion-button>Save Changes</button> -->
+    
+    <div *ngIf="mode==1 && status=='4705bd60-d2e5-4e69-9fa6-1fe85e3c5e6f'?true:false">
+            <div class="block">
+                    <div class="block-content">
+                        <table class="table table-striped table-borderless table-header-bg">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th class="text-center" style="width: 100px;">
+                                            <button ion-button clear (click)="NewChoice()">
+                                                <ion-icon class="fifth-text-color font-size-30" name="md-add"></ion-icon>
+                                            </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let choice of choices">
+                                    <td>{{choice.Description}}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button item-end ion-button (click)="TogglePopover($event, choice)" clear>
+                                                <ion-icon class="font-size-30 sixth-text-color" name="ios-more"></ion-icon>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+    </div>
+</ion-content>

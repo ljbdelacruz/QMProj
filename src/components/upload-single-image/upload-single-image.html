@@ -1,0 +1,6 @@
+<div>
+    <ion-col col-12>
+        <ion-spinner *ngIf="isUploading" name="bubbles"></ion-spinner>
+        <input type="file" (change)="onFileSelected($event)">
+    </ion-col>
+</div>

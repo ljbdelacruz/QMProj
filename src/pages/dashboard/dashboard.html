@@ -1,0 +1,34 @@
+<ion-content padding>
+    <button class="btn btn-rounded" ion-button (click)="Close()">
+        <ion-icon class="font-size-30" name="md-exit"></ion-icon>
+    </button>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-8>
+                <ion-input [(ngModel)]="code" class="border-line-bottom-1px-secondary" type="text" placeholder="Code"></ion-input>
+            </ion-col>
+            <ion-col col-4>
+                <button class="btn btn-rounded width-100-percent height-50-px" (click)="EnterCode()" ion-button>
+                    <ion-icon class="font-size-30" name="md-arrow-forward"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col col-12></ion-col>
+            <ion-col col-6 class="margin-top-20-px">
+                <a class="block block-link-hover2 text-center" (click)="ViewMyQuizTakenPage()">
+                    <div class="block-content block-content-full bg-primary">
+                        <i class="fa fa-th-list fa-4x text-white"></i>
+                        <div class="font-w600 text-white-op push-15-t">Quiz List</div>
+                    </div>
+                </a>
+            </ion-col>
+            <ion-col col-6 class="margin-top-20-px">
+                <a class="block block-link-hover2 text-center" (click)="GotoTools()">
+                    <div class="block-content block-content-full bg-primary">
+                        <i class="fa fa-cogs fa-4x text-white"></i>
+                        <div class="font-w600 text-white-op push-15-t">Tools</div>
+                    </div>
+                </a>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
